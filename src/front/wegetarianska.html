@@ -4,17 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d3c8bb;
+            margin: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #c0392b;
+            font-size: 25px;
+        }
+        img {
+            display: block;
+            margin: 10px auto;
+            border-radius: 8px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        p {
+            max-width: 600px;
+            margin: 10px auto;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
-    <img src="zdjecia/wege.jpg" alt="pizza_wegetarianska" width="120" height="120">
+    <button id="btn1">Dodaj do koszyka</button>
+    <img src="zdjecia/wege.jpg" alt="pizza_wegetarianska" width="250" height="250">
     <H1>Składniki:</H1>
     <p>sos kremowy</p>
     <p>mozarella</p>
-    <p>boczek</p>
-    <p>pieczarki</p>
+    <p>kukurydza</p>
+    <p>pomidorki koktajlowe</p>
+    <p>papryka</p>
     <p>cebula</p>
+    <p>oregano</p>
     <h2>Opis:</h2>
-    <p>Pizza Carbonara to połączenie tradycyjnej włoskiej carbonary z pizzą</p>
-
+    <p>Pizza vegetariana to bardzo smaczna odmiana pizzy bez dodatku mięsa. W jej skład wchodzą pomidory, mozzarella oraz porcja warzyw posypana oregano</p>
+    <h3>Rozmiar i cena</h3>
+    <p>Vegetariana 30cm - 27,50zł</p>
+    <p>Vegetariana 50cm - 42,50zł</p>
+    <script>
+    btn1.addEventListener("click", function() {
+            alert("Pizza Vegetariana została dodana do koszyka");
+        });
+    </script>
 </body>
 </html>
