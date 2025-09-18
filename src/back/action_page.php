@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $conn = new mysqli("localhost", "root", "", "pitcernia"); 
 if ($conn->connect_error) {
     exit("Connection error");
@@ -12,6 +14,10 @@ if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['emai
     exit("Empty values");
 }
 
+if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    exit("Invalid email format");
+}
+
 if ($stmt = $conn->prepare('SELECT id FROM klienci WHERE username = ?')) {
     $stmt->bind_param('s', $_POST['username']);
     $stmt->execute();
@@ -20,10 +26,14 @@ if ($stmt = $conn->prepare('SELECT id FROM klienci WHERE username = ?')) {
         echo 'Username already exists. Try again ';
     } else {
         if ($stmt = $conn->prepare('INSERT INTO klienci (username, password, email) VALUES (?, ?, ?)')) {
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // haszowanie hasła
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT); 
             $stmt->bind_param('sss', $_POST['username'], $password, $_POST['email']);
             if ($stmt->execute()) {
-                echo 'Successfully registered';
+                // Logowanie użytkownika po rejestracji
+                $_SESSION['loggedin'] = true;
+                $_SESSION['username'] = $_POST['username'];
+                header("Location: /2ct/src/front/strona internetowa.html");
+                exit();
             } else {
                 echo 'Error occurred during registration';
             }
@@ -35,4 +45,5 @@ if ($stmt = $conn->prepare('SELECT id FROM klienci WHERE username = ?')) {
     echo 'Error occurred';
 }
 
+$stmt->close();
 $conn->close();
