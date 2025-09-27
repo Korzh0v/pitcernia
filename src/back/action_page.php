@@ -39,7 +39,7 @@ if ($stmt = $conn->prepare('SELECT id FROM klient WHERE nazwa = ?')) {
     $stmt->bind_param('s', $username);
     $stmt->execute();
     $stmt->store_result();
-    
+
     if ($stmt->num_rows > 0) {
         $stmt->close();
         echo '<script>alert("Nazwa użytkownika już istnieje. Spróbuj ponownie z inną nazwą."); window.history.back();</script>';
@@ -55,7 +55,7 @@ if ($stmt = $conn->prepare('SELECT id FROM klient WHERE email = ?')) {
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $stmt->store_result();
-    
+
     if ($stmt->num_rows > 0) {
         $stmt->close();
         echo '<script>alert("Ten adres email jest już zarejestrowany!"); window.history.back();</script>';
@@ -70,21 +70,20 @@ if ($stmt = $conn->prepare('SELECT id FROM klient WHERE email = ?')) {
 if ($stmt = $conn->prepare('INSERT INTO klient (nazwa, email, haslo, adres) VALUES (?, ?, ?, ?)')) {
 
     $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    
+
     $stmt->bind_param('ssss', $username, $email, $password_hash, $address);
 
     if ($stmt->execute()) {
-        
+
         $_SESSION['loggedin'] = TRUE;
         $_SESSION['name'] = $username;
         $_SESSION['id'] = $conn->insert_id;
-        
+
         $stmt->close();
         $conn->close();
-        
+
         echo '<script>
-            alert("Rejestracja zakończona pomyślnie! Zostałeś automatycznie zalogowany.");
-            window.location.href = "../frontend/strona_internetowa.html";
+            window.location.href = "../front/strona internetowa.html";
         </script>';
     } else {
         $stmt->close();
@@ -95,4 +94,3 @@ if ($stmt = $conn->prepare('INSERT INTO klient (nazwa, email, haslo, adres) VALU
 }
 
 $conn->close();
-?>
