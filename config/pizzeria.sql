@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Wrz 18, 2025 at 10:05 AM
--- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.2.12
+-- Хост: 127.0.0.1
+-- Час створення: Вер 29 2025 р., 16:53
+-- Версія сервера: 10.4.32-MariaDB
+-- Версія PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pitceria`
+-- База даних: `pizzeria`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `admin`
+-- Структура таблиці `admin`
 --
 
 CREATE TABLE `admin` (
@@ -37,7 +37,7 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `klient`
+-- Структура таблиці `klient`
 --
 
 CREATE TABLE `klient` (
@@ -48,10 +48,17 @@ CREATE TABLE `klient` (
   `adres` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Дамп даних таблиці `klient`
+--
+
+INSERT INTO `klient` (`id`, `nazwa`, `email`, `haslo`, `adres`) VALUES
+(1, '2131231', 'asdasd@gmail.com', '$2y$10$PHFbG0zyqp4K6FfKOINZ5eCCeOEeqVDDACdBTQUalNu', 'asdakkdalkcwww');
+
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `pizza`
+-- Структура таблиці `pizza`
 --
 
 CREATE TABLE `pizza` (
@@ -65,7 +72,7 @@ CREATE TABLE `pizza` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `zamowienia`
+-- Структура таблиці `zamowienia`
 --
 
 CREATE TABLE `zamowienia` (
@@ -75,57 +82,57 @@ CREATE TABLE `zamowienia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indeksy dla zrzutów tabel
+-- Індекси збережених таблиць
 --
 
 --
--- Indeksy dla tabeli `admin`
+-- Індекси таблиці `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `klient`
+-- Індекси таблиці `klient`
 --
 ALTER TABLE `klient`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `pizza`
+-- Індекси таблиці `pizza`
 --
 ALTER TABLE `pizza`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `zamowienia`
+-- Індекси таблиці `zamowienia`
 --
 ALTER TABLE `zamowienia`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для збережених таблиць
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT для таблиці `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `klient`
+-- AUTO_INCREMENT для таблиці `klient`
 --
 ALTER TABLE `klient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `pizza`
+-- AUTO_INCREMENT для таблиці `pizza`
 --
 ALTER TABLE `pizza`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `zamowienia`
+-- AUTO_INCREMENT для таблиці `zamowienia`
 --
 ALTER TABLE `zamowienia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
