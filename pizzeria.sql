@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Wrz 18, 2025 at 10:05 AM
+-- Generation Time: Wrz 30, 2025 at 03:03 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pitceria`
+-- Database: `pizzeria`
 --
 
 -- --------------------------------------------------------
@@ -48,6 +48,14 @@ CREATE TABLE `klient` (
   `adres` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `klient`
+--
+
+INSERT INTO `klient` (`id`, `nazwa`, `email`, `haslo`, `adres`) VALUES
+(1, '2131231', 'asdasd@gmail.com', '$2y$10$PHFbG0zyqp4K6FfKOINZ5eCCeOEeqVDDACdBTQUalNu', 'asdakkdalkcwww'),
+(2, 'asyvfasvfaeyfa', 'jasbvfajfvvfu@gmail.com', 'isgfuavfausvfuf', 'tulipanowa 9');
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +70,13 @@ CREATE TABLE `pizza` (
   `skladniki` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `pizza`
+--
+
+INSERT INTO `pizza` (`id`, `nazwa`, `rozmiar`, `cena`, `skladniki`) VALUES
+(1, 'margherita', 50, 40, 'sos pomidorowy, ser');
+
 -- --------------------------------------------------------
 
 --
@@ -71,8 +86,20 @@ CREATE TABLE `pizza` (
 CREATE TABLE `zamowienia` (
   `id` int(11) NOT NULL,
   `id_klient` int(11) NOT NULL,
-  `id_pizza` int(11) NOT NULL
+  `id_pizza` int(11) NOT NULL,
+  `ilosc` int(11) NOT NULL,
+  `wykonane` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `zamowienia`
+--
+
+INSERT INTO `zamowienia` (`id`, `id_klient`, `id_pizza`, `ilosc`, `wykonane`) VALUES
+(1, 1, 1, 2, 0),
+(3, 2, 1, 3, 0),
+(4, 2, 1, 5, 1),
+(5, 2, 1, 5, 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -116,19 +143,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `klient`
 --
 ALTER TABLE `klient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pizza`
 --
 ALTER TABLE `pizza`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `zamowienia`
 --
 ALTER TABLE `zamowienia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
