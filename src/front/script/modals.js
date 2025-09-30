@@ -21,7 +21,6 @@ function switchToLogin() {
   openLoginModal();
 }
 
-// Close modal when clicking outside
 window.onclick = function (event) {
   const modals = document.querySelectorAll(".modal");
   modals.forEach((modal) => {

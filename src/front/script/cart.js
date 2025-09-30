@@ -1,4 +1,3 @@
-// Add to cart
 function addToCart(pizzaId) {
   const pizza = pizzas.find((p) => p.id === pizzaId);
   const quantity = parseInt(document.getElementById(`qty-${pizzaId}`).value);
@@ -16,7 +15,6 @@ function addToCart(pizzaId) {
   document.getElementById(`qty-${pizzaId}`).value = 1;
 }
 
-// Update cart count
 function updateCartCount() {
   const cartCount = document.getElementById("cartCount");
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -25,13 +23,11 @@ function updateCartCount() {
   cartCount.style.display = totalItems > 0 ? "inline" : "none";
 }
 
-// Open cart modal
 function openCart() {
   renderCart();
   document.getElementById("cartModal").style.display = "block";
 }
 
-// Render cart
 function renderCart() {
   const cartItems = document.getElementById("cartItems");
   const cartTotal = document.getElementById("cartTotal");
@@ -71,14 +67,12 @@ function renderCart() {
   checkoutBtn.style.display = "block";
 }
 
-// Remove from cart
 function removeFromCart(pizzaId) {
   cart = cart.filter((item) => item.id !== pizzaId);
   updateCartCount();
   renderCart();
 }
 
-// Checkout
 function checkout() {
   if (cart.length === 0) {
     alert("Koszyk jest pusty!");

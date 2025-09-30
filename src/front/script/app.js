@@ -26,6 +26,6 @@ function renderMenu() {
 // Initialize page
 document.addEventListener("DOMContentLoaded", function () {
   renderMenu();
-  checkLoginStatus(); // Check login status on page load
+  checkLoginStatus();
   updateCartCount();
 });

@@ -1,10 +1,8 @@
-// Toggle user dropdown
 function toggleUserDropdown() {
   const dropdown = document.getElementById("userDropdown");
   dropdown.classList.toggle("show");
 }
 
-// Close dropdown when clicking outside
 document.addEventListener('click', function(event) {
   const userMenu = document.querySelector('.user-menu');
   const dropdown = document.getElementById("userDropdown");
@@ -14,7 +12,6 @@ document.addEventListener('click', function(event) {
   }
 });
 
-// User menu functions
 function openProfileModal() {
   document.getElementById("profileModal").style.display = "block";
   document.getElementById("userDropdown").classList.remove("show");
@@ -32,18 +29,11 @@ function openSettingsModal() {
   document.getElementById("userDropdown").classList.remove("show");
 }
 
-function openFavoritesModal() {
-  document.getElementById("favoritesModal").style.display = "block";
-  document.getElementById("userDropdown").classList.remove("show");
-  loadFavorites();
-}
-
 function openSupportModal() {
   document.getElementById("supportModal").style.display = "block";
   document.getElementById("userDropdown").classList.remove("show");
 }
 
-// Load user profile data
 function loadUserProfile() {
   fetch("../back/get_user_profile.php")
     .then(response => response.json())
@@ -57,7 +47,6 @@ function loadUserProfile() {
     .catch(error => console.error('Error loading profile:', error));
 }
 
-// Load order history
 function loadOrderHistory() {
   fetch("../back/get_order_history.php")
     .then(response => response.json())
@@ -81,32 +70,7 @@ function loadOrderHistory() {
     .catch(error => console.error('Error loading order history:', error));
 }
 
-// Load favorites
-function loadFavorites() {
-  fetch("../back/get_favorites.php")
-    .then(response => response.json())
-    .then(data => {
-      const favoritesContainer = document.getElementById("favoritesContent");
-      if (data.success && data.favorites.length > 0) {
-        favoritesContainer.innerHTML = data.favorites.map(pizza => `
-          <div class="favorite-item">
-            <div class="pizza-info">
-              <div class="pizza-name">${pizza.name}</div>
-              <div class="pizza-price">${pizza.price} zł</div>
-            </div>
-            <button onclick="addToCart(${pizza.id})" class="add-to-cart">
-              Dodaj do koszyka
-            </button>
-          </div>
-        `).join('');
-      } else {
-        favoritesContainer.innerHTML = '<p style="text-align: center;">Brak ulubionych pizz</p>';
-      }
-    })
-    .catch(error => console.error('Error loading favorites:', error));
-}
 
-// Save user profile
 function saveUserProfile() {
   const formData = new FormData();
   formData.append('username', document.getElementById("profileUsername").value);
@@ -131,3 +95,5 @@ function saveUserProfile() {
       alert("Wystąpił błąd podczas aktualizacji profilu");
     });
 }
+
+

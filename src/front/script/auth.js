@@ -1,4 +1,3 @@
-// Check login status
 function checkLoginStatus() {
   fetch("../back/check_login.php")
     .then(response => response.json())
@@ -11,12 +10,10 @@ function checkLoginStatus() {
     });
 }
 
-// Update auth buttons based on login status
 function updateAuthButtons(loginData) {
   const authButtons = document.getElementById("authButtons");
   
   if (loginData.logged_in) {
-    // User is logged in - show user icon with dropdown
     authButtons.innerHTML = `
       <div class="user-menu">
         <button class="user-icon-btn" onclick="toggleUserDropdown()">
@@ -55,20 +52,6 @@ function updateAuthButtons(loginData) {
             Historia zamówień
           </button>
           
-          <button class="dropdown-item menu-btn" onclick="openSettingsModal()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="3"/>
-              <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m11-7a4 4 0 0 1 0 8 4 4 0 0 1 0-8Z"/>
-            </svg>
-            Ustawienia
-          </button>
-          
-          <button class="dropdown-item menu-btn" onclick="openFavoritesModal()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>
-            </svg>
-            Ulubione
-          </button>
           
           <button class="dropdown-item menu-btn" onclick="openSupportModal()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -93,7 +76,6 @@ function updateAuthButtons(loginData) {
       </div>
     `;
   } else {
-    // User is not logged in - show login/register buttons
     authButtons.innerHTML = `
       <button class="auth-btn" onclick="openLoginModal()">Zaloguj się</button>
       <button class="auth-btn register" onclick="openRegisterModal()">Zarejestruj się</button>
