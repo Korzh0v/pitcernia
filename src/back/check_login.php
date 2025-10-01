@@ -1,7 +1,5 @@
 <?php
 session_start();
-header('Content-Type: application/json');
-header('Cache-Control: no-cache, must-revalidate');
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     echo json_encode([
@@ -11,3 +9,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 } else {
     echo json_encode(['logged_in' => false]);
 }
+
+
+?>

@@ -1,4 +1,4 @@
-// Pizza data
+
 const pizzas = [
   { id: 1, name: "Pizza Margherita", description: "Sos pomidorowy, mozzarella, świeża bazylia", price: 25.0 },
   { id: 2, name: "Pizza Wegetariańska", description: "Sos pomidorowy, mozzarella, papryka, pieczarki, cebula", price: 28.0 },

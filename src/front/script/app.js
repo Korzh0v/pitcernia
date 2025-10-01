@@ -1,4 +1,4 @@
-// Render pizza menu
+
 function renderMenu() {
   const menuContainer = document.getElementById("menuContainer");
 
@@ -9,7 +9,7 @@ function renderMenu() {
         <div class="pizza-info">
           <div class="pizza-name">${pizza.name}</div>
           <div class="pizza-description">${pizza.description}</div>
-          <div class="pizza-price">${pizza.price.toFixed(2)} zł</div>
+          <div class="pizza-price">${pizza.price.toFixed(2  )} zł</div>
         </div>
         <div class="pizza-actions">
           <input type="number" class="quantity-input" id="qty-${pizza.id}" value="1" min="1" max="10">
@@ -23,7 +23,6 @@ function renderMenu() {
     .join("");
 }
 
-// Initialize page
 document.addEventListener("DOMContentLoaded", function () {
   renderMenu();
   checkLoginStatus();

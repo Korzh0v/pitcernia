@@ -27,7 +27,7 @@
   <!-- login -->
   <div id="loginModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <span class="close" onclick="closeModal('loginModal')"></span>
       <h2>Zaloguj się</h2>
       <form action="../back/login.php" method="POST">
         <div class="form-group">
@@ -37,7 +37,7 @@
         <div class="form-group">
           <label for="loginPassword">Hasło:</label>
           <input type="password" id="loginPassword" name="password" required />
-        </div>
+        </div>  
         <button type="submit" class="submit-btn">Zaloguj się</button>
       </form>
       <div class="form-footer">
@@ -51,7 +51,7 @@
   <!-- Profile Modal -->
   <div id="profileModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('profileModal')">&times;</span>
+      <span class="close" onclick="closeModal('profileModal')"></span>
       <h2>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -59,7 +59,7 @@
         </svg>
         Mój profil
       </h2>
-      <form onsubmit="event.preventDefault(); saveUserProfile();">
+      <form onsubmit=" saveUserProfile();">
         <div class="form-group">
           <label for="profileUsername">Nazwa użytkownika:</label>
           <input type="text" id="profileUsername" name="username" required />
@@ -84,9 +84,9 @@
   <!-- Change Password Modal -->
   <div id="changePasswordModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('changePasswordModal')">&times;</span>
+      <span class="close" onclick="closeModal('changePasswordModal')"></span>
       <h2>Zmiana hasła</h2>
-      <form onsubmit="event.preventDefault(); changePassword();">
+      <form onsubmit="changePassword();">
         <div class="form-group">
           <label for="currentPassword">Aktualne hasło:</label>
           <input type="password" id="currentPassword" required />
@@ -107,10 +107,10 @@
     </div>
   </div>
 
-  <!-- Order History Modal -->
+  <!-- Order History -->
   <div id="orderHistoryModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('orderHistoryModal')">&times;</span>
+      <span class="close" onclick="closeModal('orderHistoryModal')"></span>
       <h2>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M9 11H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h4l3 3V8l-3 3Z" />
@@ -119,15 +119,15 @@
         Historia zamówień
       </h2>
       <div id="orderHistoryContent" class="content-container">
-        <!-- Order history will be loaded here -->
+
       </div>
     </div>
   </div>
 
-  <!-- Support Modal -->
+  <!-- Support  -->
   <div id="supportModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('supportModal')">&times;</span>
+      <span class="close" onclick="closeModal('supportModal')"></span>
       <h2>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="10" />
@@ -163,10 +163,10 @@
   </div>
 
 
-  <!-- rejestracja -->
+  <!-- Register -->
   <div id="registerModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('registerModal')">&times;</span>
+      <span class="close" onclick="closeModal('registerModal')"></span>
       <h2>Zarejestruj się</h2>
       <form action="../back/action_page.php" method="POST" onsubmit="return validateForm()">
         <div class="form-group">
@@ -203,7 +203,7 @@
 
   <div id="cartModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('cartModal')">&times;</span>
+      <span class="close" onclick="closeModal('cartModal')"></span>
       <h2>Koszyk</h2>
       <div id="cartItems">
       </div>
@@ -228,20 +228,6 @@
   <script src="../front/script/update-profile.js"></script>
 
   <script>
-    function openModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.style.display = "block";
-      }
-    }
-
-    function closeModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.style.display = "none";
-      }
-    }
-
     function openChangePasswordModal() {
       closeModal('profileModal');
       openModal('changePasswordModal');
@@ -253,11 +239,6 @@
 
     function closeModal(modalId) {
       document.getElementById(modalId).style.display = "none";
-    }
-
-    function openChangePasswordModal() {
-      closeModal('profileModal');
-      openModal('changePasswordModal');
     }
 
   </script>

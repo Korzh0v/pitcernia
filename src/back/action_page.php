@@ -94,3 +94,6 @@ if ($stmt = $conn->prepare('INSERT INTO klient (nazwa, email, haslo, adres) VALU
 }
 
 $conn->close();
+
+
+?>

@@ -51,3 +51,5 @@ if ($stmt = $conn->prepare('SELECT id, haslo FROM klient WHERE nazwa = ?')) {
 }
 
 $conn->close();
+
+?>

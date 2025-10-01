@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+
+
 if (!isset($_SESSION['id'])) {
     echo json_encode(['success' => false, 'message' => 'Nie jesteś zalogowany']);
     exit();

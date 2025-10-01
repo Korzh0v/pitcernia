@@ -83,11 +83,10 @@ function updateAuthButtons(loginData) {
   }
 }
 
-// Logout function
 function logout() {
   fetch("../back/logout.php")
     .then(() => {
-      checkLoginStatus(); // Refresh the auth buttons
+      checkLoginStatus(); 
       alert("Zostałeś wylogowany!");
     })
     .catch(error => {
