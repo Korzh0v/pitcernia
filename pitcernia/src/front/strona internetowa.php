@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <?php
+  include "filtr.php";
+  ?>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pizzeria</title>
+  <link rel="stylesheet" href="../front/style/style.css" />
+</head>
+
+<body>
+  <div class="header">
+    <div></div>
+    <div class="auth-buttons" id="authButtons">
+    </div>
+  </div>
+
+  <button id="butt1" onclick="openCart()">
+    Koszyk
+    <span id="cartCount" class="cart-count" style="display: none">0</span>
+  </button>
+  <h1>Menu Pizzerii</h1>
+
+  <div class="menu-container" id="menuContainer">
+  </div>
+
+  <!-- login -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Zaloguj się</h2>
+      <form action="../back/login.php" method="POST">
+        <div class="form-group">
+          <label for="loginUsername">Nazwa użytkownika:</label>
+          <input type="text" id="loginUsername" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Hasło:</label>
+          <input type="password" id="loginPassword" name="password" required />
+        </div>
+        <button type="submit" class="submit-btn">Zaloguj się</button>
+      </form>
+      <div class="form-footer">
+        <p>
+          Nie masz konta? <a onclick="switchToRegister()">Zarejestruj się</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div id="profileModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('profileModal')">&times;</span>
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+        Mój profil
+      </h2>
+      <form onsubmit="event.preventDefault(); saveUserProfile();">
+        <div class="form-group">
+          <label for="profileUsername">Nazwa użytkownika:</label>
+          <input type="text" id="profileUsername" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="profileEmail">Email:</label>
+          <input type="email" id="profileEmail" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="profileAddress">Adres:</label>
+          <textarea id="profileAddress" name="address" placeholder="Ulica, numer domu/mieszkania, kod pocztowy, miasto"
+            required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Zapisz zmiany</button>
+        <button type="button" class="secondary-btn" onclick="openChangePasswordModal()">
+          Zmień hasło
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div id="changePasswordModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('changePasswordModal')">&times;</span>
+      <h2>Zmiana hasła</h2>
+      <form onsubmit="event.preventDefault(); changePassword();">
+        <div class="form-group">
+          <label for="currentPassword">Aktualne hasło:</label>
+          <input type="password" id="currentPassword" required />
+        </div>
+        <div class="form-group">
+          <label for="newPassword">Nowe hasło:</label>
+          <input type="password" id="newPassword" required minlength="6" />
+          <div class="password-requirements">
+            Hasło musi mieć co najmniej 6 znaków
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmNewPassword">Potwierdź nowe hasło:</label>
+          <input type="password" id="confirmNewPassword" required />
+        </div>
+        <button type="submit" class="submit-btn">Zmień hasło</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order History Modal -->
+  <div id="orderHistoryModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('orderHistoryModal')">&times;</span>
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 11H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h4l3 3V8l-3 3Z" />
+          <path d="M22 11v-1a2 2 0 0 0-2-2h-1" />
+        </svg>
+        Historia zamówień
+      </h2>
+      <div id="orderHistoryContent" class="content-container">
+        <!-- Order history will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Support Modal -->
+  <div id="supportModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('supportModal')">&times;</span>
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+          <line x1="12" y1="17" x2="12.01" y2="17" />
+        </svg>
+        Pomoc i wsparcie
+      </h2>
+      <div class="support-container">
+        <div class="faq-section">
+          <h3>Często zadawane pytania:</h3>
+          <div class="faq-item">
+            <h4>Jak złożyć zamówienie?</h4>
+            <p>Wybierz pizzę z menu, dodaj do koszyka i kliknij "Złóż zamówienie".</p>
+          </div>
+          <div class="faq-item">
+            <h4>Jak długo trwa dostawa?</h4>
+            <p>Standardowy czas dostawy wynosi 30-45 minut.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Jakie są sposoby płatności?</h4>
+            <p>Przyjmujemy gotówkę, karty płatnicze i płatności online.</p>
+          </div>
+        </div>
+        <div class="contact-section">
+          <h3>Kontakt:</h3>
+          <p><strong>Telefon:</strong> +48 123 456 789</p>
+          <p><strong>Email:</strong> kontakt@pizzeria.pl</p>
+          <p><strong>Adres:</strong> ul. Pizzowa 123, 00-001 Warszawa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- rejestracja -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('registerModal')">&times;</span>
+      <h2>Zarejestruj się</h2>
+      <form action="../back/action_page.php" method="POST" onsubmit="return validateForm()">
+        <div class="form-group">
+          <label for="registerUsername">Nazwa użytkownika:</label>
+          <input type="text" id="registerUsername" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Email:</label>
+          <input type="email" id="registerEmail" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="registerAddress">Adres:</label>
+          <textarea id="registerAddress" name="address" placeholder="Ulica, numer domu/mieszkania, kod pocztowy, miasto"
+            required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Hasło:</label>
+          <input type="password" id="registerPassword" name="password" required />
+          <div class="password-requirements">
+            Hasło musi mieć co najmniej 6 znaków
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Potwierdź hasło:</label>
+          <input type="password" id="confirmPassword" name="psw-repeat" required />
+          <div id="passwordError" class="error-message">
+            Hasła nie są identyczne
+          </div>
+        </div>
+        <button type="submit" class="submit-btn">Zmień ustawienia</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('cartModal')">&times;</span>
+      <h2>Koszyk</h2>
+      <div id="cartItems">
+      </div>
+      <div id="cartTotal" style="
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+          ">
+      </div>
+      <button id="checkoutBtn" class="submit-btn" onclick="checkout()" style="margin-top: 20px; display: none">
+        Złóż zamówienie
+      </button>
+    </div>
+  </div>
+  <script src="../front/script/user-menu.js"></script>
+  <script src="../front/script/auth.js"></script>
+  <script src="../front/script/cart.js"></script>
+  <script src="../front/script/modals.js"></script>
+  <script src="../front/script/data.js"></script>
+  <script src="../front/script/app.js"></script>
+  <script src="../front/script/update-profile.js"></script>
+
+  <script>
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.style.display = "block";
+      }
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    function openChangePasswordModal() {
+      closeModal('profileModal');
+      openModal('changePasswordModal');
+    }
+
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = "block";
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+    }
+
+    function openChangePasswordModal() {
+      closeModal('profileModal');
+      openModal('changePasswordModal');
+    }
+
+  </script>
+
+
+<h2>Menu pizzerii</h2>
+
+<h3>Filtry</h3>
+<form method="GET">
+<p>Składniki:</p>
+<?php
+$wszystkieSkladniki = [
+    "sos pomidorowy", "sos kremowy", "mozzarella", "podwójna mozzarella",
+    "szynka", "pieczarki", "boczek", "cebula", "ananas", "pepperoni",
+    "kukurydza", "pomidorki koktajlowe", "papryka", "oregano", "papryczki jalapeno"
+];
+
+foreach ($wszystkieSkladniki as $s) {
+    $checked = in_array($s, $ingredients) ? "checked" : "";
+    echo "<label><input type='checkbox' name='ingredients[]' value='$s' $checked> $s</label><br>";
+}
+?>
+<br>
+<label>Rozmiar:
+    <select name="size">
+        <option value="">Dowolny</option>
+        <option value="mały" <?php if ($size=="mały") echo "selected"; ?>>Mały</option>
+        <option value="średni" <?php if ($size=="średni") echo "selected"; ?>>Średni</option>
+        <option value="duży" <?php if ($size=="duży") echo "selected"; ?>>Duży</option>
+    </select>
+</label><br><br>
+
+<label>Cena (zł):</label><br>
+<input type="number" name="minPrice" placeholder="Od" value="<?php echo $minPrice; ?>" style="width:70px;">
+-
+<input type="number" name="maxPrice" placeholder="Do" value="<?php echo $maxPrice; ?>" style="width:70px;">
+
+<br><br>
+<button type="submit">Szukaj</button>
+</form>
+
+<h2>Pizze</h2>
+<div>
+<?php
+if (!empty($pizze)) {
+    $grupy = [];
+    foreach ($pizze as $p) {
+        $grupy[$p['nazwa']][] = $p;
+    }
+
+    foreach ($grupy as $nazwa => $warianty) {
+        $ceny = array_column($warianty, "cena", "rozmiar");
+        $zdjecie = $warianty[0]['obrazek'];
+
+        echo "<div style='margin-bottom:20px'>";
+        echo "<img src='../../public/img/$zdjecie' width='150'><br>";
+        echo "<b>$nazwa</b><br>";
+        if (count($ceny) == 3) {
+            echo "Rozmiary: mały, średni, duży<br>";
+            echo "Cena: od " . min($ceny) . " zł<br>";
+        } else {
+            foreach ($ceny as $roz => $c) {
+                echo "Rozmiar: $roz, Cena: $c zł<br>";
+            }
+        }
+        echo "<a href='pizza.php?nazwa=" . urlencode($nazwa) . "'>Szczegóły</a>";
+        echo "</div>";
+    }
+} else {
+    echo "<p>Brak wyników.</p>";
+}
+?>
+</div>
+</body>
+</html>

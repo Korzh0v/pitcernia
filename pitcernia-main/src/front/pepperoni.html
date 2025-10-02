@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d3c8bb;
+            margin: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #c0392b;
+            font-size: 25px;
+        }
+        img {
+            display: block;
+            margin: 10px auto;
+            border-radius: 8px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        p {
+            max-width: 600px;
+            margin: 10px auto;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn1">Dodaj do koszyka</button>
+    <img src="zdjecia/peperoni.jpg" alt="pizza_pepperoni" width="250" height="250">
+    <H1>Składniki:</H1>
+    <p>sos pomidorowy</p>
+    <p>podwójna mozzarella</p>
+    <p>podwójna kiełbasa pepperoni</p>
+    <h2>Opis:</h2>
+    <p>Pizza Pepperoni to jedno z najpopularniejszych dań kuchni włoskiej. Głównym składnikiem tej potrawy jest oczywiście pepperoni – pikantna kiełbasa. Oprócz niej na pizzy znajduje się sos pomidorowy i ser mozzarella</p>
+    <h3>Rozmiar i cena</h3>
+    <p>Pepperoni 30cm - 29,50zł</p>
+    <p>Pepperoni 50cm - 45zł</p>
+    <script>
+    btn1.addEventListener("click", function() {
+            alert("Pizza pepperoni została dodana do koszyka");
+        });
+    </script>
+</body>
+</html>
