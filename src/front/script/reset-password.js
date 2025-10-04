@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
       e.preventDefault();
       console.log("Formularz został wysłany"); // Debug
       
-      const emailInput = document.getElementById("email");
+      const emailInput = document.getElementById("resetEmail");
       const message = document.getElementById("resetMessage");
       
       if (!emailInput || !message) {

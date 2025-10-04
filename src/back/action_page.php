@@ -83,7 +83,7 @@ if ($stmt = $conn->prepare('INSERT INTO klient (nazwa, email, haslo, adres) VALU
         $conn->close();
 
         echo '<script>
-            window.location.href = "../front/strona internetowa.html";
+            window.location.href = "../front/strona internetowa.php";
         </script>';
     } else {
         $stmt->close();

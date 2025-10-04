@@ -60,7 +60,7 @@ if ($stmt = $conn->prepare('SELECT id FROM klient WHERE email = ? AND id != ?'))
 
 if ($stmt = $conn->prepare('UPDATE klient SET nazwa = ?, email = ?, adres = ? WHERE id = ?')) {
     $stmt->bind_param('sssi', $username, $email, $address, $user_id);
-    
+
     if ($stmt->execute()) {
         $_SESSION['name'] = $username;
         echo json_encode(['success' => true, 'message' => 'Profil zaktualizowany pomyślnie']);
@@ -73,4 +73,3 @@ if ($stmt = $conn->prepare('UPDATE klient SET nazwa = ?, email = ?, adres = ? WH
 }
 
 $conn->close();
-?>

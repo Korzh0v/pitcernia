@@ -30,7 +30,7 @@ if ($stmt = $conn->prepare('SELECT id, haslo FROM klient WHERE nazwa = ?')) {
             $_SESSION['id'] = $id;
 
             echo '<script>
-                window.location.href = "../front/strona internetowa.html";
+                window.location.href = "../front/strona internetowa.php";
             </script>';
             exit;
         } else {
